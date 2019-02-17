@@ -26,7 +26,7 @@ public abstract class AbstractHttpCall {
         DataOutputStream dataOutputStream = null;
         HttpURLConnection urlConnection = null;
 
-        HttpResponse response = new HttpResponse();
+        HttpResponse response = null;
         try {
             urlConnection = this.createUrlConnection(url, httpMethod, connectionTimeout, readTimeout);
             dataOutputStream = this.writeUrlDataConnection(urlConnection);
@@ -36,10 +36,10 @@ public abstract class AbstractHttpCall {
 
             int responseStatusCode = urlConnection.getResponseCode();
             String responseMessage = urlConnection.getResponseMessage();
-
             String responseBody = this.extractResponseBody(responseStatusCode,responseMessage, urlConnection);
+
             LOGGER.info("responseCode: " + responseStatusCode + ", responseBody:" + responseBody);
-            response.setBody(responseBody);
+            response = new HttpResponse(responseStatusCode, responseMessage, responseBody);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
         } finally {
