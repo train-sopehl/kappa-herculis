@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,9 +39,10 @@ public abstract class AbstractHttpCall {
             int responseStatusCode = urlConnection.getResponseCode();
             String responseMessage = urlConnection.getResponseMessage();
             String responseBody = this.extractResponseBody(responseStatusCode,responseMessage, urlConnection);
+            HttpResponseHeader responseHeader = this.prepareHttpResponseHeader(urlConnection);
 
             LOGGER.info("responseCode: " + responseStatusCode + ", responseBody:" + responseBody);
-            response = new HttpResponse(responseStatusCode, responseMessage, responseBody);
+            response = new HttpResponse(responseStatusCode, responseMessage, responseBody, responseHeader);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
         } finally {
@@ -127,4 +130,14 @@ public abstract class AbstractHttpCall {
 
         return String.valueOf(sb);
     }
+
+    private HttpResponseHeader prepareHttpResponseHeader(HttpURLConnection urlConnection) {
+        HttpResponseHeader httpResponseHeader = new HttpResponseHeader();
+
+        for (Map.Entry<String, List<String>> header : urlConnection.getHeaderFields().entrySet()) {
+            httpResponseHeader.addResponseHeader(header.getKey(), header.getValue());
+        }
+        return httpResponseHeader;
+    }
+
 }

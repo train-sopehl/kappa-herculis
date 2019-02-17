@@ -8,6 +8,8 @@ public class HttpResponse {
 
     private String body;
 
+    private HttpResponseHeader responseHeader;
+
     public HttpResponse() {
     }
 
@@ -15,6 +17,13 @@ public class HttpResponse {
         this.responseStatus = responseStatus;
         this.responseMessage = responseMessage;
         this.body = body;
+    }
+
+    public HttpResponse(int responseStatus, String responseMessage, String body, HttpResponseHeader responseHeader) {
+        this.responseStatus = responseStatus;
+        this.responseMessage = responseMessage;
+        this.body = body;
+        this.responseHeader = responseHeader;
     }
 
     public String getBody() {
@@ -41,12 +50,21 @@ public class HttpResponse {
         this.responseMessage = responseMessage;
     }
 
+    public HttpResponseHeader getResponseHeader() {
+        return responseHeader;
+    }
+
+    public void setResponseHeader(HttpResponseHeader responseHeader) {
+        this.responseHeader = responseHeader;
+    }
+
     @Override
     public String toString() {
         return "HttpResponse{" +
                 "responseStatus=" + responseStatus +
                 ", responseMessage='" + responseMessage + '\'' +
                 ", body='" + body + '\'' +
+                ", responseHeader=" + responseHeader +
                 '}';
     }
 }

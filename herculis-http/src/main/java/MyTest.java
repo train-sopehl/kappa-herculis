@@ -7,13 +7,15 @@ public class MyTest {
 
     public static void main(String[] args) {
         HerculisHttpCall httpCall = new HerculisHttpCall();
-        HttpResponse response = httpCall.doAction("http://ip.jsontest.com/?callback=showMyIP", HttpMethod.GET, null);
-        System.out.println(response);
 
         HttpRequestParameter parameter = new HttpRequestParameter();
         parameter.addParameter("callback", "showMyIP");
-        HttpResponse response2 = httpCall.doAction("http://ip.jsontest.com/", HttpMethod.GET, parameter);
-        System.out.println(response2);
+
+        HttpResponse response = httpCall.doAction("http://ip.jsontest.com/", HttpMethod.GET, parameter);
+        System.out.println(response);
+        System.out.println(response.getResponseHeader().getResponseHeader("Content-Length"));
+        System.out.println(response.getResponseHeader().getResponseHeader("Date"));
+        System.out.println(response.getResponseHeader().getResponseHeader("Content-Type"));
     }
 
 }
