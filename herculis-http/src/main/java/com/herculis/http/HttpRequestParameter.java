@@ -39,6 +39,6 @@ public class HttpRequestParameter {
             }
         }
         String resultAsString = String.valueOf(requestParameters);
-        return resultAsString.length() > 0 ? resultAsString.substring(0, resultAsString.length() - 1): resultAsString;
+        return resultAsString.length() > 0 ? resultAsString.substring(0, resultAsString.length() - 1) : resultAsString;
     }
 }

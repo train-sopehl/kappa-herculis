@@ -20,17 +20,11 @@ public abstract class AbstractHttpCall {
 
     private static final int DEFAULT_READ_TIMEOUT = 5000;
 
-
-    public HttpResponse doAction(String url, HttpMethod httpMethod, HttpRequestHeader requestHeader){
-        return this.doAction(url, httpMethod, null, requestHeader, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
+    public HttpResponse doAction(String url, HttpMethod httpMethod, HttpRequest httpRequest){
+        return this.doAction(url, httpMethod, httpRequest, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
     }
 
-    public HttpResponse doAction(String url, HttpMethod httpMethod, HttpRequestParameter parameter, HttpRequestHeader requestHeader){
-        return this.doAction(url, httpMethod, parameter, requestHeader, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
-    }
-
-    public HttpResponse doAction(String url, HttpMethod httpMethod, HttpRequestParameter parameter,
-                                 HttpRequestHeader requestHeader, int connectionTimeout, int readTimeout){
+    public HttpResponse doAction(String url, HttpMethod httpMethod, HttpRequest httpRequest, int connectionTimeout, int readTimeout){
         DataOutputStream dataOutputStream = null;
         HttpURLConnection urlConnection = null;
 
@@ -38,19 +32,19 @@ public abstract class AbstractHttpCall {
         try {
             urlConnection = this.createUrlConnection(url, httpMethod, connectionTimeout, readTimeout);
 
-            if (requestHeader != null) {
-                this.setHttpRequestHeaders(urlConnection, requestHeader);
+            if (httpRequest != null) {
+                this.setHttpRequestHeaders(urlConnection, httpRequest);
             }
 
-            if (parameter != null) {
-                String requestParameter = parameter.formRequestParameter();
+            if (httpMethod != HttpMethod.GET && httpRequest != null) {
+                String requestParameter = httpRequest.getRawData();
                 dataOutputStream = this.writeUrlDataConnection(urlConnection);
-                dataOutputStream.writeBytes(requestParameter);
+                dataOutputStream.write(requestParameter.getBytes());
             }
 
             int responseStatusCode = urlConnection.getResponseCode();
             String responseMessage = urlConnection.getResponseMessage();
-            String responseBody = this.extractResponseBody(responseStatusCode,responseMessage, urlConnection);
+            String responseBody = this.extractResponseBody(responseStatusCode, responseMessage, urlConnection);
             HttpResponseHeader responseHeader = this.prepareHttpResponseHeader(urlConnection);
 
             LOGGER.info("responseCode: " + responseStatusCode + ", responseBody: " + responseBody);
@@ -154,8 +148,8 @@ public abstract class AbstractHttpCall {
         return httpResponseHeader;
     }
 
-    private void setHttpRequestHeaders(HttpURLConnection urlConnection, HttpRequestHeader requestHeader) {
-        Map<String, String> httpHeaders = requestHeader.getHttpHeaders();
+    private void setHttpRequestHeaders(HttpURLConnection urlConnection, HttpRequest httpRequest) {
+        Map<String, String> httpHeaders = httpRequest.getHttpHeaders();
         for (String key : httpHeaders.keySet()) {
             urlConnection.setRequestProperty(key, httpHeaders.get(key));
         }
