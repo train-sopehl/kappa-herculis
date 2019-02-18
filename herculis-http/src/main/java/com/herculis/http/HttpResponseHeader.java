@@ -6,28 +6,28 @@ import java.util.Map;
 
 public class HttpResponseHeader {
 
-    private Map<String, List<String>> header;
+    private Map<String, List<String>> responseHeader;
 
     public HttpResponseHeader() {
-        this.header = new HashMap<String, List<String>>();
+        this.responseHeader = new HashMap<String, List<String>>();
     }
 
-    public HttpResponseHeader(Map<String, List<String>> header) {
-        this.header = header;
+    public HttpResponseHeader(Map<String, List<String>> responseHeader) {
+        this.responseHeader = responseHeader;
     }
 
     public List<String> addResponseHeader(String key, List<String> value) {
-        return this.header.put(key, value);
+        return this.responseHeader.put(key, value);
     }
 
     public List<String> getResponseHeader(String key) {
-        return this.header.get(key);
+        return this.responseHeader.get(key);
     }
 
     @Override
     public String toString() {
         return "HttpResponseHeader{" +
-                "header=" + header +
+                "responseHeader=" + responseHeader +
                 '}';
     }
 }
