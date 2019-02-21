@@ -148,11 +148,11 @@ public abstract class AbstractHttpCall {
         return httpResponseHeader;
     }
 
-    private void setHttpRequestHeaders(HttpURLConnection urlConnection, HttpRequest httpRequest) {
-        Map<String, String> httpHeaders = httpRequest.getHttpHeaders();
-        for (String key : httpHeaders.keySet()) {
-            urlConnection.setRequestProperty(key, httpHeaders.get(key));
-        }
-    }
+	private void setHttpRequestHeaders(HttpURLConnection urlConnection, HttpRequest httpRequest) {
+		Map<String, String> httpHeaders = httpRequest.getHttpHeaders();
+		for (Map.Entry<String, String> entry : httpHeaders.entrySet()) {
+			urlConnection.setRequestProperty(entry.getKey(), entry.getValue());
+		}
+	}
 
 }
