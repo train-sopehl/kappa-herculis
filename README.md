@@ -1,1 +1,1 @@
-# kappa-herculis
+# kappa-herculis project
