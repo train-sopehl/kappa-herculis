@@ -11,6 +11,7 @@
 
     <modules>
         <module>herculis-http</module>
+        <module>herculis-properties</module>
     </modules>
 
     <dependencyManagement>
@@ -23,6 +24,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 
 </project>
