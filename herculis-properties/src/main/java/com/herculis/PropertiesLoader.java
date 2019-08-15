@@ -4,6 +4,6 @@ import java.util.Properties;
 
 public interface PropertiesLoader {
 
-    public Properties load();
+    Properties load();
 
 }
