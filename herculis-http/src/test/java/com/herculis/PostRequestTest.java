@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class PostRequestTest {
 
-    private HerculisHttpCall httpCall = new HerculisHttpCall();
+    private HerculisHttpCall httpCall = HerculisHttpCall.getInstance();
 
     @Test
     public void httpGetCall_withSuccess() {

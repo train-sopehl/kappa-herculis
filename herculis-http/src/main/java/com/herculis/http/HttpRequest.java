@@ -68,4 +68,14 @@ public class HttpRequest {
 
         return this.body;
     }
+
+    public void addParameter(String key, String value){
+        this.getParameters().addParameter(key, value);
+    }
+
+    public void addParameter(Map<String, String> map){
+        for (Map.Entry<String, String> item : map.entrySet()) {
+            this.addParameter(item.getKey(), item.getValue());
+        }
+    }
 }

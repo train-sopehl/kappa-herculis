@@ -12,7 +12,7 @@ public class GetRequestTest {
 
     private static final Logger LOGGER = Logger.getLogger(GetRequestTest.class.getName());
 
-    private HerculisHttpCall httpCall = new HerculisHttpCall();
+    private HerculisHttpCall httpCall = HerculisHttpCall.getInstance();
 
     @Test
     public void httpGetCall_withSuccess() {

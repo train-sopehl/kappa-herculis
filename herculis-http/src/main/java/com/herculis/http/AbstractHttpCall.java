@@ -31,7 +31,6 @@ public abstract class AbstractHttpCall {
         HttpResponse response = null;
         try {
             urlConnection = this.createUrlConnection(url, httpMethod, connectionTimeout, readTimeout);
-
             if (httpRequest != null) {
                 this.setHttpRequestHeaders(urlConnection, httpRequest);
             }
