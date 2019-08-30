@@ -4,7 +4,7 @@ import com.herculis.contract.Transformable;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.output.JsonStream;
 
-public class JsoniterTransform implements Transformable {
+public class JsoniterTransformer implements Transformable {
 
     @Override
     public <T> T toObject(String data, Class<T> clazz) {

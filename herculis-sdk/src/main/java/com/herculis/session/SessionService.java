@@ -8,7 +8,8 @@ import com.herculis.http.HttpRequest;
 import com.herculis.http.HttpResponse;
 import com.herculis.model.RequestPaymentSessionToken;
 import com.herculis.model.ResponsePaymentSessionToken;
-import com.herculis.transform.JsoniterTransform;
+import com.herculis.transform.JsoniterTransformer;
+import com.herculis.util.CredentialUtils;
 import com.herculis.util.FieldMapper;
 
 import java.io.UnsupportedEncodingException;
@@ -27,7 +28,7 @@ public class SessionService {
     private static final Logger LOGGER = Logger.getLogger(FieldMapper.class.getName());
 
     public SessionService(){
-        this.transformable = new JsoniterTransform();
+        this.transformable = new JsoniterTransformer();
     }
 
     public SessionService(Transformable transformable){
@@ -42,7 +43,7 @@ public class SessionService {
         httpRequest.addParameter("AMOUNT", String.valueOf(request.getAmount()));
         httpRequest.addParameter("CURRENCY", request.getCurrency().name());
         httpRequest.addParameter(FieldMapper.mapObjectFields(request.getPayment()));
-        httpRequest.addParameter(FieldMapper.mapObjectFields(request.getMerchant()));
+        httpRequest.addParameter(CredentialUtils.getCredentials());
         httpRequest.addParameter(FieldMapper.mapObjectFields(request.getCustomer()));
         httpRequest.addParameter(FieldMapper.mapObjectFields(request.getBillAddress()));
         httpRequest.addParameter(FieldMapper.mapObjectFields(request.getShipAddress()));
