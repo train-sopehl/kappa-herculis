@@ -2,6 +2,8 @@ package com.herculis.session;
 
 import com.herculis.constant.ResponseSet;
 import com.herculis.model.*;
+import com.herculis.model.request.PaymentSessionTokenRequest;
+import com.herculis.model.response.PaymentSessionTokenResponse;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +17,11 @@ public class SessionServiceTest {
 
     private SessionService sessionService = new SessionService();
 
-    private RequestPaymentSessionToken paymentSessionToken;
+    private PaymentSessionTokenRequest paymentSessionToken;
 
     @Before
     public void init(){
-        paymentSessionToken = new RequestPaymentSessionToken();
+        paymentSessionToken = new PaymentSessionTokenRequest();
 
         paymentSessionToken.setAmount(new BigDecimal("4.54"));
         paymentSessionToken.setCurrency(Currency.TRY);
@@ -69,19 +71,19 @@ public class SessionServiceTest {
 
     @Test
     public void getPaymentSessionToken_withSuccess(){
-        ResponsePaymentSessionToken responsePaymentSessionToken = sessionService.getPaymentSessionToken(paymentSessionToken);
+        PaymentSessionTokenResponse paymentSessionTokenResponse = sessionService.getPaymentSessionToken(paymentSessionToken);
 
-        Assert.assertEquals(ResponseSet.SUCCESS, responsePaymentSessionToken.getResponseCode());
-        Assert.assertNotNull(responsePaymentSessionToken.getSessionToken());
+        Assert.assertEquals(ResponseSet.SUCCESS, paymentSessionTokenResponse.getResponseCode());
+        Assert.assertNotNull(paymentSessionTokenResponse.getSessionToken());
     }
 
     @Test
     public void getPaymentSessionToken_withFail(){
         paymentSessionToken.setAmount(new BigDecimal("10"));
-        ResponsePaymentSessionToken responsePaymentSessionToken = sessionService.getPaymentSessionToken(paymentSessionToken);
+        PaymentSessionTokenResponse paymentSessionTokenResponse = sessionService.getPaymentSessionToken(paymentSessionToken);
 
-        Assert.assertEquals(ResponseSet.DECLINED, responsePaymentSessionToken.getResponseCode());
-        Assert.assertNotNull(responsePaymentSessionToken.getErrorCode());
+        Assert.assertEquals(ResponseSet.DECLINED, paymentSessionTokenResponse.getResponseCode());
+        Assert.assertNotNull(paymentSessionTokenResponse.getErrorCode());
     }
 
 }

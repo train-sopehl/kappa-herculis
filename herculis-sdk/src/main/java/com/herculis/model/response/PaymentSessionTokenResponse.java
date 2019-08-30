@@ -1,6 +1,6 @@
-package com.herculis.model;
+package com.herculis.model.response;
 
-public class ResponsePaymentSessionToken {
+public class PaymentSessionTokenResponse {
 
     private String responseCode;
 
@@ -64,7 +64,7 @@ public class ResponsePaymentSessionToken {
 
     @Override
     public String toString() {
-        return "ResponsePaymentSessionToken{" +
+        return "PaymentSessionTokenResponse{" +
                 "responseCode='" + responseCode + '\'' +
                 ", responseMsg='" + responseMsg + '\'' +
                 ", errorCode='" + errorCode + '\'' +

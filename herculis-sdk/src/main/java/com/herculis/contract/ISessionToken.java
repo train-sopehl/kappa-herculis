@@ -1,10 +1,10 @@
 package com.herculis.contract;
 
-import com.herculis.model.RequestPaymentSessionToken;
-import com.herculis.model.ResponsePaymentSessionToken;
+import com.herculis.model.request.PaymentSessionTokenRequest;
+import com.herculis.model.response.PaymentSessionTokenResponse;
 
 public interface ISessionToken {
 
-    ResponsePaymentSessionToken getPaymentSessionToken(RequestPaymentSessionToken request);
+    PaymentSessionTokenResponse getPaymentSessionToken(PaymentSessionTokenRequest request);
 
 }

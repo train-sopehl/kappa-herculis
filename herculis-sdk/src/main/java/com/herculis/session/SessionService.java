@@ -7,8 +7,8 @@ import com.herculis.http.HerculisHttpCall;
 import com.herculis.http.HttpMethod;
 import com.herculis.http.HttpRequest;
 import com.herculis.http.HttpResponse;
-import com.herculis.model.RequestPaymentSessionToken;
-import com.herculis.model.ResponsePaymentSessionToken;
+import com.herculis.model.request.PaymentSessionTokenRequest;
+import com.herculis.model.response.PaymentSessionTokenResponse;
 import com.herculis.transform.JsoniterTransformer;
 import com.herculis.util.CredentialUtils;
 import com.herculis.util.FieldMapper;
@@ -37,7 +37,7 @@ public class SessionService implements ISessionToken {
     }
 
     @Override
-    public ResponsePaymentSessionToken getPaymentSessionToken(RequestPaymentSessionToken request) {
+    public PaymentSessionTokenResponse getPaymentSessionToken(PaymentSessionTokenRequest request) {
         HerculisHttpCall httpCall = HerculisHttpCall.getInstance();
 
         HttpRequest httpRequest = new HttpRequest();
@@ -58,7 +58,7 @@ public class SessionService implements ISessionToken {
 
         HttpResponse httpResponse = httpCall.doAction(apiUrl, HttpMethod.POST, httpRequest);
         String httpResponseBody = httpResponse.getBody();
-        return transformable.toObject(httpResponseBody, ResponsePaymentSessionToken.class);
+        return transformable.toObject(httpResponseBody, PaymentSessionTokenResponse.class);
     }
 
 }

@@ -13,11 +13,12 @@ public class GenericPropertiesLoader implements PropertiesLoader{
 
     private static final Logger LOGGER = Logger.getLogger(GenericPropertiesLoader.class.getName());
 
-    private Properties properties = new Properties();
+    private Properties properties;
 
     @Override
     public Properties load() {
         String propertiesFileName = getPropertiesFileName();
+        properties = new Properties();
 
         this.inputStream = getClass().getClassLoader().getResourceAsStream(propertiesFileName);
 
@@ -41,6 +42,10 @@ public class GenericPropertiesLoader implements PropertiesLoader{
     }
 
     public Properties getProperties() {
+        if (properties == null) {
+            properties = new Properties();
+        }
+
         return this.properties;
     }
 

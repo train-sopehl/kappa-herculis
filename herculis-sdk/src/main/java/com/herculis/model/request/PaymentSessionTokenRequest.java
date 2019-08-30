@@ -1,9 +1,11 @@
-package com.herculis.model;
+package com.herculis.model.request;
+
+import com.herculis.model.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class RequestPaymentSessionToken {
+public class PaymentSessionTokenRequest {
 
     private BigDecimal amount;
 
