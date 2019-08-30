@@ -1,6 +1,7 @@
 package com.herculis.session;
 
 import com.herculis.GenericProperties;
+import com.herculis.contract.ISessionToken;
 import com.herculis.contract.Transformable;
 import com.herculis.http.HerculisHttpCall;
 import com.herculis.http.HttpMethod;
@@ -17,7 +18,7 @@ import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SessionService {
+public class SessionService implements ISessionToken {
 
     private GenericProperties properties = GenericProperties.getInstance();
 
@@ -35,6 +36,7 @@ public class SessionService {
         this.transformable = transformable;
     }
 
+    @Override
     public ResponsePaymentSessionToken getPaymentSessionToken(RequestPaymentSessionToken request) {
         HerculisHttpCall httpCall = HerculisHttpCall.getInstance();
 
