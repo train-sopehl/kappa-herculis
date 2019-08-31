@@ -1,6 +1,9 @@
-package com.herculis.contract;
+package com.herculis.service;
 
 import com.herculis.GenericProperties;
+import com.herculis.contract.IFinancialTransaction;
+import com.herculis.contract.ISessionToken;
+import com.herculis.contract.Transformable;
 import com.herculis.http.HerculisHttpCall;
 import com.herculis.http.HttpMethod;
 import com.herculis.http.HttpRequest;

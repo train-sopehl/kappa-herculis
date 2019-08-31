@@ -1,9 +1,9 @@
-package com.herculis.session;
+package com.herculis.service;
 
 import com.herculis.contract.GsonTransformer;
 import com.herculis.contract.IFinancialTransaction;
-import com.herculis.contract.SaleTransaction;
 import com.herculis.model.request.SaleRequest;
+import com.herculis.session.SessionService;
 import com.herculis.support.DummyUtils;
 import org.junit.Before;
 import org.junit.Test;
